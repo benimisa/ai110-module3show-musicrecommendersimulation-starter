@@ -10,14 +10,6 @@
 
 This recommender is designed to suggest songs from a small catalog based on a user's preferred genre, mood, energy, and acoustic preference. It is for classroom exploration and not for real production use.
 
-Describe what your recommender is designed to do and who it is for. 
-
-Prompts:  
-
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
-
 ---
 
 ## 3. How the Model Works  
