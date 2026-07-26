@@ -2,12 +2,13 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+**VibeFinder 1.0**
 
 ---
 
 ## 2. Intended Use  
+
+This recommender is designed to suggest songs from a small catalog based on a user's preferred genre, mood, energy, and acoustic preference. It is for classroom exploration and not for real production use.
 
 Describe what your recommender is designed to do and who it is for. 
 
@@ -21,91 +22,55 @@ Prompts:
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+This model uses song metadata like genre, mood, energy, tempo, valence, and acousticness to compute a score for each track. It gives the biggest boost to exact genre matches, a smaller boost to mood matches, and then adds fractional points for songs whose energy and emotional tone are close to the user profile. When the user chooses acoustic preference, the system also favors songs that match that acousticness level.
 
-Prompts:  
-
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+This is a content-based recommender because it compares the attributes of each song to the user's taste rather than looking at what other listeners preferred.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
+The catalog contains 17 songs across genres like pop, lofi, rock, ambient, jazz, synthwave, indie pop, folk, edm, classical, reggae, blues, hip-hop, and ambient dream pop. Moods include happy, chill, intense, relaxed, moody, focused, dreamy, calm, relaxed, sad, and confident.
 
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+I added 7 new songs to the starter dataset to increase genre and mood variety. The dataset is still small and does not include lyrics, artist popularity, skip history, or user listening sessions.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
+The system works well for users who have clear genre and mood preferences. It can distinguish between high-energy and low-energy tracks and tends to recommend songs that feel close to the target energy.
 
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+For profiles like happy pop listeners, it correctly raises pop songs and energy-aligned tracks to the top.
 
 ---
 
-## 6. Limitations and Bias 
+## 6. Limitations and Bias  
 
-Where the system struggles or behaves unfairly. 
+The model can over-prioritize genre because exact genre matches are worth more points than mood or energy closeness. If a user's favorite genre is common in the dataset, recommendation results can become narrow.
 
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+It also ignores temporal behavior like likes, skips, playlists, and trends, and it does not learn from other users' behavior. This content-based approach may miss good songs in underrepresented genres or moods.
 
 ---
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
+I tested the recommender with different user profiles such as a pop/happy listener, a chill acoustic listener, and a high-energy workout listener. I looked for whether the top songs matched the intended vibe and whether energy closeness mattered.
 
-Prompts:  
-
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
-
-No need for numeric metrics unless you created some.
+I also checked cases where the same song should not win for very different tastes. The model behaves sensibly when genre and mood align but can be too genre-focused if the catalog is small.
 
 ---
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+- Add more user behavior features such as likes, skips, and playlist history
+- Introduce a collaborative filtering layer to compare users instead of only song attributes
+- Add richer audio features like rhythm, instrumentation, and lyrical sentiment
+- Improve diversity by penalizing repeated genres in the top results
 
 ---
 
 ## 9. Personal Reflection  
 
-A few sentences about your experience.  
+I learned that simple rules can still produce useful song recommendations if the features are chosen carefully. Using AI to help shape the scoring logic was helpful, but I had to check the numeric weights and exact matching ideas myself.
 
-Prompts:  
-
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+It was surprising how much extra control a small content-based system gives: once I decided which features matter most, I could predict why a song would rise or fall in the ranked list.
