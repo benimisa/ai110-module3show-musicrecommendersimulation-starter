@@ -31,7 +31,7 @@
 > Document how AI helped you choose or implement a design pattern.
 
 **Which design pattern did you use?**
-
+/benimisa/ai110-module3show-musicrecommendersimulation-starter/
 <!-- e.g., Strategy, Factory, Observer, etc. -->
 
 **How did AI help you brainstorm or implement it?**
